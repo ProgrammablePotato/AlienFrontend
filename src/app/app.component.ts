@@ -19,9 +19,26 @@ export class AppComponent {
   newAlien:any={}
 
   constructor(private base:BaseService) {
-    base.getAliens().subscribe(
+    this.getAliens()
+  }
+  getAliens(){
+    this.base.getAliens().subscribe(
       (res)=>this.aliens=res
-
+    )
+  }
+  postAlien() {
+    this.base.postAlien(this.newAlien).subscribe(
+      ()=>this.getAliens()
+    )
+  }
+  updateAlien(alien:any) {
+    this.base.updateAlien(alien).subscribe(
+      ()=>this.getAliens()
+    )
+  }
+  deleteAlien(alien:any) {
+    this.base.deleteAlien(alien).subscribe(
+      ()=>this.getAliens()
     )
   }
 }

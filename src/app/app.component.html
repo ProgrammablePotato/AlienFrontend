@@ -11,17 +11,16 @@
       <input [(ngModel)]="newAlien[oszlop.key]" [type]="oszlop.type">
     </div>
     <div class="col">
-      <button type="button" class="btn btn-primary">Add</button>
-
+      <button type="button" class="btn btn-primary" (click)="postAlien()">Add</button>
     </div>
   </div>
   <div *ngFor="let alien of aliens" class="row">
     <div *ngFor="let oszlop of oszlopok" class="col">
-      {{alien[oszlop.key]}}
+      <input [(ngModel)]="alien[oszlop.key]" [type]="oszlop.type" class="outInput">
     </div>
     <div class="col">
-      <button type="button" class="btn btn-primary">Update</button>
-      <button type="button" class="btn btn-primary">Delete</button>
+      <button type="button" class="btn btn-primary" (click)="updateAlien(alien)">Update</button>
+      <button type="button" class="btn btn-danger" (click)="deleteAlien(alien)">Delete</button>
     </div>
   </div>
 </div>
