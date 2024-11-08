@@ -1,12 +1,13 @@
-import { Component } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { BaseService } from './base.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent {
+export class AppComponent implements OnInit, OnDestroy {
   title = 'AlienFrontend';
   oszlopok=[
     {key:"name",text:"name",type:"text"},
@@ -17,13 +18,29 @@ export class AppComponent {
 
   aliens:any
   newAlien:any={}
+  feliratkozas!:Subscription
+  error=false
 
   constructor(private base:BaseService) {
+    
+  }
+  ngOnInit():void {
     this.getAliens()
   }
+  ngOnDestroy(): void {
+    if (this.feliratkozas) this.feliratkozas.unsubscribe()
+  }
   getAliens(){
-    this.base.getAliens().subscribe(
-      (res)=>this.aliens=res
+    this.feliratkozas=this.base.getAliens().subscribe({
+      next: (res)=>{
+        this.aliens=res
+        this.error=false
+      },
+      error: (err) => {
+        console.log(err)
+        this.error = true
+      }
+    }
     )
   }
   postAlien() {

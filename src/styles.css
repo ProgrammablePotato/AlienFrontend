@@ -6,6 +6,7 @@ body {
 
 .outInput{
     background-color: #3d3d3d;
+    background: linear-gradient(90deg, rgba(255,0,0,1) 0%, rgba(242,145,25,1) 20%, rgba(244,238,20,1) 40%, rgba(34,247,14,1) 60%, rgba(10,21,218,1) 80%, rgba(255,0,236,1) 100%);
     color: white;
     border-radius: 5px;
 }

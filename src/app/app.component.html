@@ -1,5 +1,5 @@
 <!-- {{aliens|json}} -->
-<div class="container">
+<div *ngIf="!error;else hiba" class="container">
   <div class="row">
     <div *ngFor="let oszlop of oszlopok" class="col">
       {{oszlop.text}}
@@ -24,4 +24,8 @@
     </div>
   </div>
 </div>
+
+<ng-template #hiba>
+  <div class="">Hiba van!</div>
+</ng-template>
 
